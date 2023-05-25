@@ -1,0 +1,33 @@
+// Generate Quote Function
+function generateQuote() {
+  var patientName = document.getElementById("patient-name").value;
+  var email = document.getElementById("email").value;
+
+  // Perform validation and generate the quote
+  if (patientName && email) {
+    // Generate the quote based on the user input
+    var quote = "Your quote is being processed. Please wait...";
+    // Display the quote result
+    document.getElementById("quote-result").textContent = quote;
+  } else {
+    // Display an error message if required fields are empty
+    alert("Please fill in all the required fields.");
+  }
+}
+
+// Login Function
+function login() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  // Perform validation and login
+  if (username && password) {
+    // Perform login verification and redirect to the payment page
+    alert("Login successful! Redirecting to the payment page...");
+    // Uncomment the following line to redirect to the payment page
+    // window.location.href = "payment.html";
+  } else {
+    // Display an error message if username or password is empty
+    alert("Please enter a valid username and password.");
+  }
+}
