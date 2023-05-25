@@ -1,0 +1,65 @@
+// Create a Patient schema
+const patientSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+  gender: String,
+  contact: String,
+  address: String
+});
+
+// Create a Patient model
+const Patient = mongoose.model('Patient', patientSchema);
+
+// API endpoints for patient management
+app.get('/api/patients', (req, res) => {
+  // Fetch all patients from the database
+  Patient.find({}, (error, patients) => {
+    if (error) {
+      console.error('Error fetching patients:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(patients);
+    }
+  });
+});
+
+app.post('/api/patients', (req, res) => {
+  // Create a new patient
+  const newPatient = req.body;
+
+  Patient.create(newPatient, (error, createdPatient) => {
+    if (error) {
+      console.error('Error creating patient:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(201).json(createdPatient);
+    }
+  });
+});
+
+app.put('/api/patients/:id', (req, res) => {
+  const patientId = req.params.id;
+  const updatedPatient = req.body;
+
+  Patient.findByIdAndUpdate(patientId, updatedPatient, { new: true }, (error, updatedDoc) => {
+    if (error) {
+      console.error('Error updating patient:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(updatedDoc);
+    }
+  });
+});
+
+app.delete('/api/patients/:id', (req, res) => {
+  const patientId = req.params.id;
+
+  Patient.findByIdAndRemove(patientId, (error, removedDoc) => {
+    if (error) {
+      console.error('Error deleting patient:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(removedDoc);
+    }
+  });
+});
