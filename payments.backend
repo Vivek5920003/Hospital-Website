@@ -1,0 +1,22 @@
+const stripe = require('stripe')('YOUR_STRIPE_SECRET_KEY');
+
+// API endpoint for making a payment
+app.post('/api/payments', async (req, res) => {
+  const { amount, token } = req.body;
+
+  try {
+    // Create a charge using the Stripe API
+    const charge = await stripe.charges.create({
+      amount: amount * 100, // Stripe requires the amount in cents
+      currency: 'usd', // Set the currency according to your requirements
+      source: token,
+      description: 'Payment for services'
+    });
+
+    // Payment was successful
+    res.json({ success: true, charge });
+  } catch (error) {
+    console.error('Error making payment:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
