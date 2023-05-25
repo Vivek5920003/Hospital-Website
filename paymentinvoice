@@ -1,0 +1,61 @@
+// Create an Invoice schema
+const invoiceSchema = new mongoose.Schema({
+  patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient' },
+  amount: Number,
+  isPaid: { type: Boolean, default: false }
+});
+
+// Create an Invoice model
+const Invoice = mongoose.model('Invoice', invoiceSchema);
+
+// API endpoint for creating an invoice
+app.post('/api/invoices', (req, res) => {
+  const { patientId, amount } = req.body;
+
+  // Create a new invoice
+  const newInvoice = new Invoice({
+    patientId,
+    amount
+  });
+
+  newInvoice.save((error, createdInvoice) => {
+    if (error) {
+      console.error('Error creating invoice:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(201).json(createdInvoice);
+    }
+  });
+});
+
+// API endpoint for updating invoice status (payment)
+app.put('/api/invoices/:id', (req, res) => {
+  const invoiceId = req.params.id;
+  const { isPaid } = req.body;
+
+  Invoice.findByIdAndUpdate(invoiceId, { isPaid }, { new: true }, (error, updatedInvoice) => {
+    if (error) {
+      console.error('Error updating invoice:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(updatedInvoice);
+    }
+  });
+});
+
+// API endpoint for fetching invoices by patient
+app.get('/api/invoices/:patientId', (req, res) => {
+  const patientId = req.params.patientId;
+
+  // Find invoices by patient ID
+  Invoice.find({ patientId })
+    .populate('patientId', 'name')
+    .exec((error, invoices) => {
+      if (error) {
+        console.error('Error fetching invoices:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.json(invoices);
+      }
+    });
+});
