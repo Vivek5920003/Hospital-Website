@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Healthcare Provider Firm</title>
+  <!-- Include necessary CSS and JavaScript libraries -->
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Healthcare Provider Firm</h1>
+    <nav>
+      <ul>
+        <li><a href="#hospitals">Browse Hospitals</a></li>
+        <li><a href="#quotes">Instant Quotes</a></li>
+        <li><a href="#assessments">Assessments & Reports</a></li>
+        <li><a href="#payments">Online Payments</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hospitals Section -->
+    <section id="hospitals">
+      <h2>Browse Hospitals</h2>
+      <div class="photo-gallery">
+        <!-- Display hospital photos dynamically -->
+        <img src="hospital1.jpg" alt="Hospital 1">
+        <img src="hospital2.jpg" alt="Hospital 2">
+        <img src="hospital3.jpg" alt="Hospital 3">
+      </div>
+      <a href="price_list.pdf" download>Download Price List</a>
+      <a href="online_tour.html">Take an Online Tour</a>
+    </section>
+
+    <!-- Instant Quotes Section -->
+    <section id="quotes">
+      <h2>Instant Quotes</h2>
+      <div class="quote-tool">
+        <!-- Implement quote tool dynamically -->
+        <input type="text" id="patient-name" placeholder="Patient Name">
+        <input type="text" id="email" placeholder="Email">
+        <button onclick="generateQuote()">Get Quote</button>
+      </div>
+      <div id="quote-result">
+        <!-- Display quote result dynamically -->
+      </div>
+    </section>
+
+    <!-- Assessments & Reports Section -->
+    <section id="assessments">
+      <h2>Assessments & Reports</h2>
+      <p>View your assessments and reports online:</p>
+      <a href="reports.html">View Reports</a>
+    </section>
+
+    <!-- Online Payments Section -->
+    <section id="payments">
+      <h2>Online Payments</h2>
+      <p>Login to make online payments for outstanding invoices:</p>
+      <form>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Healthcare Provider Firm. All rights reserved.</p>
+  </footer>
+</body>
+</html>
