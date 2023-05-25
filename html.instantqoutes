@@ -1,0 +1,7 @@
+<!-- Add input fields and a button for generating the quote -->
+<input type="text" id="patient-name" placeholder="Patient Name">
+<input type="text" id="email" placeholder="Email">
+<button onclick="generateQuote()">Get Quote</button>
+
+<!-- Add a container to display the quote result -->
+<div id="quote-result"></div>
